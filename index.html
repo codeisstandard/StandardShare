@@ -45,7 +45,7 @@
 
 <p>Using Bower:</p>
 
-<pre><code>bower install StandardShare
+<pre><code>bower install standard-share
 </code></pre>
 
 <p>Or grab the <a href="https://github.com/codeisstandard/StandardShare/dist/StandardShare.js">source</a> (<a href="https://github.com/codeisstandard/StandardShare/dist/StandardShare.min.js">minified</a>).</p>
@@ -55,15 +55,79 @@
 
 <p>Basic usage is as follows:</p>
 
-<pre><code>StandardShare();
-</code></pre>
+<div class="highlight highlight-javascript"><pre>StandardShare.shareList().bindEvents().afterComplete(<span class="pl-st">function</span>() {
+  <span class="pl-c">//Handle the callback here. if you have to close a list.</span>
+});</pre></div>
+
+<p>StandardShare works by traversing a ul with a default class of <code>standard-share</code>.</p>
+
+<p>If you do not want to use the default class name you can pass in the name of the element like so</p>
+
+<div class="highlight highlight-javascript"><pre>shareList(<span class="pl-s1"><span class="pl-pds">'</span>.your-custom-list<span class="pl-pds">'</span></span>)</pre></div>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">ul</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>standard-share<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">li</span> <span class="pl-e">data-standard-share</span>=<span class="pl-s1"><span class="pl-pds">"</span>facebook<span class="pl-pds">"</span></span> <span class="pl-e">data-standard-link</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;Facebook &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>icon icon-facebook<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">a</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li</span> <span class="pl-e">data-standard-share</span>=<span class="pl-s1"><span class="pl-pds">"</span>twitter<span class="pl-pds">"</span></span> <span class="pl-e">data-standard-link</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;Twitter &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>icon icon-twitter<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">a</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li</span> <span class="pl-e">data-standard-share</span>=<span class="pl-s1"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span> <span class="pl-e">data-standard-link</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span> &gt;
+      &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;Email &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>icon icon-mail<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">a</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li</span> <span class="pl-e">data-standard-share</span>=<span class="pl-s1"><span class="pl-pds">"</span>copy-link<span class="pl-pds">"</span></span> <span class="pl-e">data-standard-link</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;Copy Link &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>icon icon-link<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">a</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li</span> <span class="pl-e">data-standard-share</span>=<span class="pl-s1"><span class="pl-pds">"</span>calender<span class="pl-pds">"</span></span> <span class="pl-e">data-standard-link</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;Add To Calendar &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>icon icon-calendar<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">a</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+&lt;/<span class="pl-ent">ul</span>&gt;</pre></div>
+
+<p>The <code>data-standard-share="&lt;any social share name&gt;"</code> the names have to match the list below.</p>
+
+<table>
+<thead>
+<tr>
+<th>data-standard-share=</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>facebook</td>
+<td>Facebook</td>
+</tr>
+<tr>
+<td>twitter</td>
+<td>Twitter</td>
+</tr>
+<tr>
+<td>email</td>
+<td>This will open the email client</td>
+</tr>
+<tr>
+<td>copy-link</td>
+<td>This will use the <a href="https://github.com/zeroclipboard/zeroclipboard">ZeroClipboard</a> library.<br>If you are using this option please read below about it</td>
+</tr>
+<tr>
+<td>calender</td>
+<td>To Be Implimented</td>
+</tr>
+</tbody>
+</table>
+
+<p><code>data-standard-link="&lt;link that will be shared&gt;"</code></p>
 
 <p>For advanced usage, see the documentation.</p>
 
 <h2>
-<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+<a id="zeroclipboard" class="anchor" href="#zeroclipboard" aria-hidden="true"><span class="octicon octicon-link"></span></a>ZeroClipboard</h2>
 
-<p>Start with <code>docs/MAIN.md</code>.</p>
+<p>Because copying to the clipboard is an operating system task we will need to use flash. <a href="https://github.com/zeroclipboard/zeroclipboard">ZeroClipboard</a>
+has already implemented this.</p>
+
+<p>If you use the copy-link option please be sure to include the ZeroClipboard.js and ZeroClipboard.swf
+in the same folder and remember that StandardShare will depend on it.</p>
 
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
