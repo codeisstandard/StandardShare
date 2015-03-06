@@ -12,7 +12,7 @@ See the [project homepage](http://codeisstandard.github.io/StandardShare).
 
 Using Bower:
 
-    bower install StandardShare
+    bower install standard-share
 
 Or grab the [source](https://github.com/codeisstandard/StandardShare/dist/StandardShare.js) ([minified](https://github.com/codeisstandard/StandardShare/dist/StandardShare.min.js)).
 

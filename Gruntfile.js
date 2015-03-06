@@ -39,7 +39,8 @@ module.exports = function(grunt) {
           module: true,
           document: true,
           jQuery: true,
-          window: true
+          window: true,
+          devel:true
         },
         jshintrc: '.jshintrc'
       }

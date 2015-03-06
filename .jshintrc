@@ -16,7 +16,8 @@
     "$": false,
     "jQuery": false,
     "window": false,
-    "document": false
+    "document": false,
+    "ZeroClipboard": false
   }
 }
 
