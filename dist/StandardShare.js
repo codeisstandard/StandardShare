@@ -6,10 +6,6 @@ var StandardShare = (function() {
   var DEFAULTS = {
     list: ".standard-share",
     closeList: null,
-    messages: {
-      facebook: "",
-      twitter: ""
-    },
     clipboardClient: null
   };
 
@@ -17,17 +13,20 @@ var StandardShare = (function() {
     handleShare: function (element, callback) {
       var shareType = $(element).data('standard-share');
       var link = $(element).data('standard-link');
+      var message = $(element).data('standard-message');
       switch(shareType) {
       case 'facebook':  {
-          this.shareFacebook(link);
+          this.shareFacebook(link, message);
         }
         break;
       case 'twitter':  {
-          this.shareTwitter(link);
+          this.shareTwitter(link, message);
         }
         break;
       case 'email':  {
-          window.location.href = "mailto:?body=" + encodeURIComponent(link);
+          var subject = $(element).data('standard-subject') || '';
+
+          window.location.href = "mailto:?subject="+subject+"&body=" + message +" "+encodeURIComponent(link);
         }
         break;
       case 'copy-link': {
@@ -47,26 +46,17 @@ var StandardShare = (function() {
       window.open(url, 'sharer', opts);
     },
 
-    shareTwitter: function (link) {
+    shareTwitter: function (link, message) {
       var width = 575, height = 400;
       var left = ($(window).width() - width) / 2;
       var top = ($(window).height() - height) / 2;
       var opts = 'status=1,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left;
-      var url = "http://twitter.com/share?text=" + DEFAULTS.messages.twitter + "&url=" + encodeURI(link);
+      var url = "http://twitter.com/share?text=" + message + "&url=" + encodeURI(link);
       window.open(url, 'twitter', opts);
     }
 
   };
-  return {
-    shareList: function () {
-      var myArguments = arguments[0] || {};
-      var list = myArguments.list || DEFAULTS.list;
-      DEFAULTS.list = list; //Sets list
-      this.prepareZeroClipboard();
-      return this;
-    },
-
-    prepareZeroClipboard: function() {
+  function prepareZeroClipboard () {
       $(DEFAULTS.list + ' li').each(function (){
         //Test if it is a copy link element
         //We have to activate the flash button here and not on the on click.
@@ -91,12 +81,21 @@ var StandardShare = (function() {
         }
       });
 
+    }
+  return {
+    shareList: function () {
+      var myArguments = arguments[0] || {};
+      var list = myArguments.list || DEFAULTS.list;
+      DEFAULTS.list = list; //Sets list
+      prepareZeroClipboard();
+      return this;
     },
+
+    
 
     bindEvents: function () {
       $(DEFAULTS.list + ' li').each(function (){
           $(this).on('click', function() {
-
               methods.handleShare(this, function() {
                 if (DEFAULTS.closeList !== null && typeof(DEFAULTS.closeList) === 'function') {
                   DEFAULTS.closeList();

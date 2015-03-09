@@ -37,10 +37,10 @@ shareList('.your-custom-list')
     <li data-standard-share="facebook" data-standard-link="#">
       <a href="#">Facebook <span class="icon icon-facebook"></span></a>
     </li>
-    <li data-standard-share="twitter" data-standard-link="#">
+    <li data-standard-share="twitter" data-standard-link="#" data-standard-message="message">
       <a href="#">Twitter <span class="icon icon-twitter"></span></a>
     </li>
-    <li data-standard-share="email" data-standard-link="#" >
+    <li data-standard-share="email" data-standard-link="#" data-standard-message="message" data-standard-subject="subject">
       <a href="#">Email <span class="icon icon-mail"></span></a>
     </li>
     <li data-standard-share="copy-link" data-standard-link="#">
@@ -52,6 +52,9 @@ shareList('.your-custom-list')
 </ul>
 ```
 The ```data-standard-share="<any social share name>"``` the names have to match the list below.
+
+```data-standard-message="Message attribute" ``` This message will be copied over to the users share prompt. This will not work for Facebook because they have disabled that option. In a future upgrade we will upgrade the library to use Facebook dialog. 
+
 
 | data-standard-share=  | Description  |
 | ------------- | ----------- |
