@@ -87,11 +87,12 @@ var StandardShare = (function() {
       var myArguments = arguments[0] || {};
       var list = myArguments.list || DEFAULTS.list;
       DEFAULTS.list = list; //Sets list
+      ZeroClipboard.destroy();
       prepareZeroClipboard();
       return this;
     },
 
-    
+
 
     bindEvents: function () {
       $(DEFAULTS.list + ' li').each(function (){
