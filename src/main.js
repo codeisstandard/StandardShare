@@ -115,4 +115,4 @@ var StandardShare = (function() {
   };
 })();
 
-StandardShare.VERSION = '1.0.0';
+StandardShare.VERSION = '0.0.2';
