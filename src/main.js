@@ -28,6 +28,8 @@ var StandardShare = (function() {
           // The flash button is already active. Use this area for user feedback
           // (e.g. a notice saying the link is copied).
           break;
+        case 'calendar':
+          this.addToCalendar(link);
       }
       callback();
     },
@@ -48,6 +50,13 @@ var StandardShare = (function() {
       var opts = 'status=1,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left;
       var url = "http://twitter.com/share?text=" + message + "&url=" + encodeURI(link);
       window.open(url, 'twitter', opts);
+    },
+    
+    addToCalendar: function (link) {
+      var cal = ics();
+      cal.addEvent('Demo Event', 'This is an all day event', 'Atlanta, GA', '4/28/2015', '4/28/2015');
+      cal.addEvent('Demo Event', 'This is thirty minute event', 'Atlanta, GA', '4/29/2015 5:30 pm', '4/29/2015 6:00 pm');
+      cal.download('Demo Event');
     }
   };
   
