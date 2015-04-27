@@ -13,6 +13,10 @@ var StandardShare = (function() {
       var shareType = $(element).data('standard-share');
       var link = $(element).data('standard-link');
       var message = $(element).data('standard-message');
+      var subject = $(element).data('standard-subject') || '';
+      var location = $(element).data('standard-location') || '';
+      var begin = $(element).data('standard-begin-date');
+      var end = $(element).data('standard-end-date');
       switch(shareType) {
         case 'facebook':
           this.shareFacebook(link, message);
@@ -21,7 +25,6 @@ var StandardShare = (function() {
           this.shareTwitter(link, message);
           break;
         case 'email':
-          var subject = $(element).data('standard-subject') || '';
           window.location.href = "mailto:?subject=" + subject + "&body=" + message + " " +encodeURIComponent(link);
           break;
         case 'copy-link':
@@ -29,7 +32,7 @@ var StandardShare = (function() {
           // (e.g. a notice saying the link is copied).
           break;
         case 'calendar':
-          this.addToCalendar(link);
+          this.addToCalendar(link, subject, location, begin, end);
       }
       callback();
     },
@@ -52,16 +55,15 @@ var StandardShare = (function() {
       window.open(url, 'twitter', opts);
     },
     
-    addToCalendar: function (link) {
+    addToCalendar: function (link, subject, location, begin, end) {
       var cal = ics();
-      cal.addEvent('Demo Event', 'This is an all day event', 'Atlanta, GA', '4/28/2015', '4/28/2015');
-      cal.addEvent('Demo Event', 'This is thirty minute event', 'Atlanta, GA', '4/29/2015 5:30 pm', '4/29/2015 6:00 pm');
-      cal.download('Demo Event');
+      cal.addEvent(subject, link, location, begin, end);
+      cal.download(subject);
     }
   };
   
   function prepareZeroClipboard () {
-    $(DEFAULTS.list + ' li').each(function (){
+    $(DEFAULTS.list + ' li').each(function () {
       // Test if it is a copy link element. We have to activate the flash
       // button here and not on the on click.
       if ($(this).data('standard-share') === 'copy-link') {
